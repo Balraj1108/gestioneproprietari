@@ -17,31 +17,43 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 	@Override
 	public List<Automobile> list() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("from Automobile", Automobile.class).getResultList();
 	}
 
 	@Override
 	public Automobile get(Long id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Automobile.class, id);
 	}
 
 	@Override
 	public void update(Automobile o) throws Exception {
 		// TODO Auto-generated method stub
-		
+		if (o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		o = entityManager.merge(o);
+
 	}
 
 	@Override
 	public void insert(Automobile o) throws Exception {
 		// TODO Auto-generated method stub
-		
+		if (o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		entityManager.persist(o);
+
 	}
 
 	@Override
 	public void delete(Automobile o) throws Exception {
 		// TODO Auto-generated method stub
-		
+		if (o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		entityManager.remove(entityManager.merge(o));
+
 	}
 	
 	
