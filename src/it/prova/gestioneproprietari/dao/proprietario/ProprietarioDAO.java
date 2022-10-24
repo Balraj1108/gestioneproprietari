@@ -5,4 +5,7 @@ import it.prova.gestioneproprietari.model.Proprietario;
 
 public interface ProprietarioDAO extends IBaseDAO<Proprietario> {
 
+	
+	public int contaProprietariAutomobiliAnnoInPoi(Integer annoInput) throws Exception;
+	
 }

@@ -115,5 +115,22 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		}
 		
 	}
+
+	@Override
+	public int contaProprietariAutomobiliAnnoInPoi(Integer annoInput) throws Exception {
+		// TODO Auto-generated method stub
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			proprietarioDAO.setEntityManager(entityManager);
+			return proprietarioDAO.contaProprietariAutomobiliAnnoInPoi(annoInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
 	
 }

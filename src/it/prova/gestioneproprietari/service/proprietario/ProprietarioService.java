@@ -19,6 +19,8 @@ public interface ProprietarioService {
 	public void inserisciNuovo(Proprietario proprietarioInstance) throws Exception;
 
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception;
+	
+	public int contaProprietariAutomobiliAnnoInPoi(Integer annoInput) throws Exception;
 
 	//per injection
 	public void setProprietarioDAO(ProprietarioDAO proprietarioDAO);

@@ -1,6 +1,7 @@
 package it.prova.gestioneproprietari.test;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import it.prova.gestioneproprietari.dao.EntityManagerUtil;
@@ -23,6 +24,7 @@ public class TestProprietarioAutomobile {
 		
 			testCrudAutomobile(automobileService, proprietarioService);
 			
+			testContaProprietariAutomobiliAnnoInPoi(automobileService, proprietarioService);
 			
 			
 			
@@ -64,6 +66,7 @@ public class TestProprietarioAutomobile {
 
 		
 		proprietarioService.rimuovi(proprietario1);
+		proprietarioService.rimuovi(proprietario2);
 		if (proprietarioService.caricaSingoloProprietario(idProprietario1) != null)
 			throw new RuntimeException("Test fallito: rimozione non andato a buon fine");
 
@@ -111,5 +114,40 @@ public class TestProprietarioAutomobile {
 
 		System.out.println(".......testCrudAutomobile fine: PASSED.............");
 	}
+	
+	private static void testContaProprietariAutomobiliAnnoInPoi(AutomobileService automobileService, 
+			ProprietarioService proprietarioService) throws Exception {
+		// TODO Auto-generated method stub
+
+		
+		Proprietario Proprietario1 = new Proprietario("mario", "rossi", "dsadda", new Date());
+		proprietarioService.inserisciNuovo(Proprietario1);
+		Proprietario Proprietario2 = new Proprietario("mario", "bianchi", "dsafrw", new Date());
+		proprietarioService.inserisciNuovo(Proprietario2);
+
+		
+		Automobile Automobile1 = new Automobile("suzuki", "k500", "dasdf", 2020);
+		Automobile1.setProprietario(Proprietario1);
+		automobileService.inserisciNuova(Automobile1);
+		Automobile Automobile2 = new Automobile("honda", "k5500", "d656", 2019);
+		Automobile2.setProprietario(Proprietario2);
+		automobileService.inserisciNuova(Automobile2);
+		
+		System.out.println(".......testContaProprietariAutomobiliAnnoInPoi inizio.............");
+
+		int conta = proprietarioService.contaProprietariAutomobiliAnnoInPoi(2010);
+		if (conta != 2)
+			throw new RuntimeException("Test fallito");
+
+		
+		automobileService.rimuovi(Automobile1.getId());
+		proprietarioService.rimuovi(Proprietario1);
+		automobileService.rimuovi(Automobile2.getId());
+		proprietarioService.rimuovi(Proprietario2);
+
+		System.out.println(".......testContaProprietariAutomobiliAnnoInPoi fine: PASSED.............");
+
+	}
+
 
 }
