@@ -19,6 +19,10 @@ public interface AutomobileService {
 
 	public void rimuovi(Long idAutomobileInstance) throws Exception;
 	
+	public List<Automobile> listaAutomobiliCodiceFiscale(String codiceFiscaleInput) throws Exception;
+
+	public List<Automobile> listaAutomobiliErrori() throws Exception;
+	
 	//per injection
 	public void setAutomobileDAO(AutomobileDAO automobileDAO);
 	
